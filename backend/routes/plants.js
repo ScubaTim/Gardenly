@@ -13,7 +13,6 @@ router.get('/', async (req, res) => {
         res.status(500).send(error.message)
         console.log("Error getting plants from database:", error)
     }
-
 })
 
 router.post('/', async (req, res) => {
@@ -26,6 +25,8 @@ router.post('/', async (req, res) => {
     })
     const { error } = schema.validate(req.body)
     if (error) return res.status(400).send(error.details[0].message)
+
+    //Need to check if plant already exists here -Not Done
 
     const { name, author, isInGarden, uid, date } = req.body
 
@@ -40,6 +41,7 @@ router.post('/', async (req, res) => {
     try {
         plant = await plant.save()
         res.send(plant)
+
     } catch (error) {
         res.status(500).send(error.message)
         console.log("Error posting plant", error)

@@ -1,5 +1,6 @@
 const plants = require('./routes/plants')
-
+const signUp = require('./routes/signUp')
+const signIn = require('./routes/signIn')
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
@@ -11,7 +12,9 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-app.use("/api/myGarden", plants)
+app.use('/api/myGarden', plants)
+app.use('/api/signup', signUp)
+app.use('/api/signin', signIn)
 
 app.get('/', (req, res) => {
     res.send("Welcome to Gardenly api!")
