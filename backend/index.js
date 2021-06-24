@@ -12,7 +12,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-app.use('/api/myGarden', plants)
+app.use('/api/garden', plants)
 app.use('/api/signup', signUp)
 app.use('/api/signin', signIn)
 

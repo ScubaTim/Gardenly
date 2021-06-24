@@ -2,6 +2,8 @@ import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import Garden from './components/garden/Garden'
+import PlantDetail from './components/garden/PlantDetail'
+import AddPlant from './components/garden/AddPlant'
 import SignIn from './components/auth/SignIn'
 import SignUp from './components/auth/SignUp'
 import NavBar from './components/navbar/NavBar'
@@ -15,6 +17,8 @@ function App() {
         <NavBar />
         <Container fluid >
           <Switch>
+            <Route path="/plantdetail" component={PlantDetail} />
+            <Route path="/addplant" component={AddPlant} />
             <Route path="/signin" component={SignIn} />
             <Route path="/signup" component={SignUp} />
             <Route path="/" component={Garden} />
