@@ -1,4 +1,5 @@
 const { Plant } = require("../models/plant")
+//const auth = require("../middleware/auth")
 const express = require("express")
 const Joi = require("joi")
 

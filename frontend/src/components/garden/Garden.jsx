@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom'
+
+import { useDispatch, useSelector } from 'react-redux'
+
+import { getPlants } from '../../store/actions/gardenActions'
 
 import PlantCard from '../plantCard/PlantCard'
 
@@ -8,6 +12,14 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 
 const Garden = () => {
+    const dispatch = useDispatch(getPlants())
+    const garden = useSelector((state) => state.garden)
+
+    useEffect(() => {
+        dispatch(getPlants())
+    }, [dispatch])
+
+
 
     return (
         <>
@@ -20,18 +32,19 @@ const Garden = () => {
                 </Col>
             </Row>
             <Row className="border border-success rounded mx-2 pb-5 d-flex justify-content-center">
-                <Col xs="auto">
-                    <PlantCard />
-                </Col>
-                <Col xs="auto">
-                    <PlantCard />
-                </Col>
-                <Col xs="auto">
-                    <PlantCard />
-                </Col>
-                <Col xs="auto">
-                    <PlantCard />
-                </Col>
+                {garden.length === 0
+                    ? <h4>Your garden is empty. Add some plants!</h4>
+                    : garden.map((plant) => (
+                        <Col xs="auto">
+                            <PlantCard
+                                name={plant.name}
+                                date={plant.date}
+                                author={plant.author}
+                                key={plant._id}
+                            />
+                        </Col>
+                    ))
+                }
             </Row>
         </>
     )

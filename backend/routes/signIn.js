@@ -1,4 +1,5 @@
 const { User } = require('../models/user')
+const { Plant } = require('../models/plant')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const express = require("express")
