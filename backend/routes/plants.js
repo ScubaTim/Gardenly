@@ -22,21 +22,37 @@ router.post('/', async (req, res) => {
         author: Joi.string().min(3).max(30),
         uid: Joi.string(),
         isInGarden: Joi.boolean(),
-        date: Joi.date()
+        date: Joi.date(),
+        growingZone: Joi.string(),
+        seedDepth: Joi.string(),
+        soilType: Joi.string(),
+        sunlight: Joi.string(),
+        harvestIn: Joi.string(),
+        watering: Joi.string(),
+        fromSeed: Joi.string(),
+        heirloom: Joi.string()
     })
     const { error } = schema.validate(req.body)
     if (error) return res.status(400).send(error.details[0].message)
 
     //Need to check if plant already exists here -Not Done
 
-    const { name, author, isInGarden, uid, date } = req.body
+    const { name, author, isInGarden, uid, date, growingZone, seedDepth, soilType, sunlight, harvestIn, watering, fromSeed, heirloom } = req.body
 
     let plant = new Plant({
         name,
         author,
         isInGarden,
         uid,
-        date
+        date,
+        growingZone,
+        seedDepth,
+        soilType,
+        sunlight,
+        harvestIn,
+        watering,
+        fromSeed,
+        heirloom
     })
 
     try {
@@ -55,7 +71,15 @@ router.put('/:id', async (req, res) => {
         author: Joi.string().min(3).max(30),
         uid: Joi.string(),
         isInGarden: Joi.boolean(),
-        date: Joi.date()
+        date: Joi.date(),
+        growingZone: Joi.string(),
+        seedDepth: Joi.string(),
+        soilType: Joi.string(),
+        sunlight: Joi.string(),
+        harvestIn: Joi.string(),
+        watering: Joi.string(),
+        fromSeed: Joi.string(),
+        heirloom: Joi.string()
     })
     const { error } = schema.validate(req.body)
     if (error) return res.status(400).send(error.details[0].message)
@@ -69,9 +93,17 @@ router.put('/:id', async (req, res) => {
         const updatedPlant = await Plant.findByIdAndUpdate(req.params.id, {
             name,
             author,
-            uid,
             isInGarden,
-            date
+            uid,
+            date,
+            growingZone,
+            seedDepth,
+            soilType,
+            sunlight,
+            harvestIn,
+            watering,
+            fromSeed,
+            heirloom
         }, { new: true })
         res.send(updatedPlant)
 
@@ -82,7 +114,6 @@ router.put('/:id', async (req, res) => {
 })
 
 router.patch('/:id', async (req, res) => {
-    //Toggles isInGarden
     try {
         const plant = await Plant.findById(req.params.id)
 

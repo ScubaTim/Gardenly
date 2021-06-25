@@ -21,7 +21,32 @@ const plantSchema = new mongoose.Schema({
     date: {
         type: Date,
         default: new Date()
+    },
+    growingZone: {
+        type: String
+    },
+    seedDepth: {
+        type: String
+    },
+    soilType: {
+        type: String
+    },
+    sunlight: {
+        type: String
+    },
+    harvestIn: {
+        type: String
+    },
+    watering: {
+        type: String
+    },
+    fromSeed: {
+        type: String
+    },
+    heirloom: {
+        type: String
     }
+
 })
 
 const Plant = mongoose.model('Plant', plantSchema)

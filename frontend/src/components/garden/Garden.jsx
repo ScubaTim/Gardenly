@@ -33,7 +33,7 @@ const Garden = () => {
             </Row>
             <Row className="border border-success rounded mx-2 pb-5 d-flex justify-content-center">
                 {garden.length === 0
-                    ? <h4>Your garden is empty. Add some plants!</h4>
+                    ? <div className="text-center"><h2 className="my-5 text-muted font-weight-light">Your garden is empty..</h2><h2 className="my-5 text-muted font-weight-light">Add Some Plants!</h2></div>
                     : garden.map((plant) => (
                         <Col xs="auto">
                             <PlantCard
