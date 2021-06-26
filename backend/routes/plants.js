@@ -120,7 +120,8 @@ router.patch('/:id', async (req, res) => {
         if (!plant) return res.status(404).send("Plant does not exist in the database.")
 
         const updatedPlant = await Plant.findByIdAndUpdate(req.params.id, {
-            isInGarden: !plant.isInGarden
+            isInGarden: !plant.isInGarden,
+
         })
         res.send(updatedPlant)
 

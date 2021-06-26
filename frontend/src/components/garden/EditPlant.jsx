@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { useHistory } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 
 import ToggleButton from "react-bootstrap/ToggleButton";
 import Container from 'react-bootstrap/Container'
@@ -11,26 +11,34 @@ import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-import { addPlant } from '../../store/actions/gardenActions'
+import { getPlant, updatePlant } from '../../store/actions/gardenActions'
 
-const AddPlant = () => {
+const EditPlant = () => {
     let history = useHistory()
-    const dispatch = useDispatch()
-    const [name, setName] = useState("")
-    const [checked, setChecked] = useState(false);
-    const [growingZone, setGrowingZone] = useState("1")
-    const [seedDepth, setSeedDepth] = useState("0")
-    const [soilType, setSoilType] = useState("Sandy")
-    const [sunlight, setSunlight] = useState("Shade")
-    const [harvestIn, setHarvestIn] = useState("0")
-    const [watering, setWatering] = useState("Twice Daily")
-    const [fromSeed, setFromSeed] = useState("No")
-    const [heirloom, setHeirloom] = useState("No")
+    const dispatch = useDispatch(getPlant())
+    const state = useSelector((state) => state.garden)
+    const { id } = useParams()
 
-    const handleSubmit = (e) => {
+    const plant = state.filter((plant) => plant._id === id)
+    console.log('plant growingZone', plant[0].growingZone)
+
+    const [name, setName] = useState(plant[0].name)
+    const [checked, setChecked] = useState(plant[0].isInGarden)
+    const [growingZone, setGrowingZone] = useState(plant[0].growingZone)
+    const [seedDepth, setSeedDepth] = useState(plant[0].seedDepth)
+    const [soilType, setSoilType] = useState(plant[0].soilType)
+    const [sunlight, setSunlight] = useState(plant[0].sunlight)
+    const [harvestIn, setHarvestIn] = useState(plant[0].harvestIn)
+    const [watering, setWatering] = useState(plant[0].watering)
+    const [fromSeed, setFromSeed] = useState(plant[0].fromSeed)
+    const [heirloom, setHeirloom] = useState(plant[0].heirloom)
+    console.log('plant growingZone', plant[0].growingZone)
+
+
+    const handleUpdateSubmit = (e) => {
         e.preventDefault()
 
-        let plant = {
+        let updatedPlant = {
             name,
             isInGarden: checked,
             growingZone,
@@ -43,25 +51,27 @@ const AddPlant = () => {
             heirloom
         }
 
-        dispatch(addPlant(plant))
-        history.push("/");
+        console.log('updatedPlant', updatedPlant)
+
+        dispatch(updatePlant(updatedPlant, plant[0]._id)) //this doesn't work because 
+        history.push('/')
     }
 
     return (
         <Container fluid className="d-flex flex-column">
             <div className="mt-3 mx-3">
-                <h1>Add New Plant</h1>
+                <h1>Edit Plant Details</h1>
             </div>
-            <Form className="border rounded p-4 m-3 shadow" onSubmit={handleSubmit} >
+            <Form className="border rounded p-4 m-3 shadow" onSubmit={handleUpdateSubmit} >
                 <Row className="mb-3">
                     <Form.Group as={Col} >
                         <Form.Label>Plant Name</Form.Label>
-                        <Form.Control type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter name" />
+                        <Form.Control type="text" value={name} onChange={(e) => setName(e.target.value)} />
                     </Form.Group>
 
                     <Form.Group as={Col}>
                         <Form.Label>Heirloom</Form.Label>
-                        <Form.Control as="select" defaultValue="Yes" onChange={(e) => setHeirloom(e.target.value)}>
+                        <Form.Control as="select" defaultValue={heirloom} onChange={(e) => setHeirloom(e.target.value)}>
                             <option>Yes</option>
                             <option>No</option>
                         </Form.Control>
@@ -69,7 +79,7 @@ const AddPlant = () => {
 
                     <Form.Group as={Col} >
                         <Form.Label>From Seed</Form.Label>
-                        <Form.Control as="select" defaultValue="Yes" onChange={(e) => setFromSeed(e.target.value)}>
+                        <Form.Control as="select" defaultValue={fromSeed} onChange={(e) => setFromSeed(e.target.value)}>
                             <option>Yes</option>
                             <option>No</option>
                         </Form.Control>
@@ -79,7 +89,7 @@ const AddPlant = () => {
                 <Row className="my-3">
                     <Form.Group as={Col} >
                         <Form.Label>Growing Zone</Form.Label>
-                        <Form.Control as="select" defaultValue="1" onChange={(e) => setGrowingZone(e.target.value)}>
+                        <Form.Control as="select" defaultValue={growingZone} onChange={(e) => setGrowingZone(e.target.value)}>
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -98,12 +108,12 @@ const AddPlant = () => {
 
                     <Form.Group as={Col}>
                         <Form.Label>Seed Depth (Inches)</Form.Label>
-                        <Form.Control onChange={(e) => setSeedDepth(e.target.value)} />
+                        <Form.Control onChange={(e) => setSeedDepth(e.target.value)} defaultValue={seedDepth} />
                     </Form.Group>
 
                     <Form.Group as={Col}>
                         <Form.Label>Soil Type</Form.Label>
-                        <Form.Control as="select" defaultValue="Sandy" onChange={(e) => setSoilType(e.target.value)}>
+                        <Form.Control as="select" defaultValue={soilType} onChange={(e) => setSoilType(e.target.value)}>
                             <option>Sandy</option>
                             <option>Silty</option>
                             <option>Arid</option>
@@ -117,7 +127,7 @@ const AddPlant = () => {
                 <Row className="my-3">
                     <Form.Group as={Col} controlId="formGridCity">
                         <Form.Label>Sunlight</Form.Label>
-                        <Form.Control as="select" defaultValue="Shade" onChange={(e) => setSunlight(e.target.value)}>
+                        <Form.Control as="select" defaultValue={sunlight} onChange={(e) => setSunlight(e.target.value)}>
                             <option>Shade</option>
                             <option>Dappled</option>
                             <option>Full Sun</option>
@@ -126,12 +136,12 @@ const AddPlant = () => {
 
                     <Form.Group as={Col}>
                         <Form.Label>Harvest In (Days)</Form.Label>
-                        <Form.Control onChange={(e) => setHarvestIn(e.target.value)} />
+                        <Form.Control defaultValue={harvestIn} onChange={(e) => setHarvestIn(e.target.value)} />
                     </Form.Group>
 
                     <Form.Group as={Col}>
                         <Form.Label>Watering Frequency</Form.Label>
-                        <Form.Control as="select" defaultValue="Twice Daily" onChange={(e) => setWatering(e.target.value)}>
+                        <Form.Control as="select" defaultValue={watering} onChange={(e) => setWatering(e.target.value)}>
                             <option>Twice Daily</option>
                             <option>Daily</option>
                             <option>Every Other Day</option>
@@ -167,4 +177,4 @@ const AddPlant = () => {
     )
 }
 
-export default AddPlant
+export default EditPlant

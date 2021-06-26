@@ -1,50 +1,26 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom'
 
-import { useDispatch, useSelector } from 'react-redux'
-
-import { getPlants } from '../../store/actions/gardenActions'
-
-import PlantCard from '../plantCard/PlantCard'
+import PlantsList from '../garden/PlantsList'
 
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 
 const Garden = () => {
-    const dispatch = useDispatch(getPlants())
-    const garden = useSelector((state) => state.garden)
-
-    useEffect(() => {
-        dispatch(getPlants())
-    }, [dispatch])
-
-
 
     return (
         <>
             <Row className="my-4 d-flex justify-content-between">
                 <Col xs="auto">
-                    <h4>Your Garden</h4>
+                    <h1>Your Garden</h1>
                 </Col>
                 <Col xs="auto">
                     <Button><Link className="text-white" to="/addplant">Add Plant</Link></Button>
                 </Col>
             </Row>
             <Row className="border border-success rounded mx-2 pb-5 d-flex justify-content-center">
-                {garden.length === 0
-                    ? <div className="text-center"><h2 className="my-5 text-muted font-weight-light">Your garden is empty..</h2><h2 className="my-5 text-muted font-weight-light">Add Some Plants!</h2></div>
-                    : garden.map((plant) => (
-                        <Col xs="auto">
-                            <PlantCard
-                                name={plant.name}
-                                date={plant.date}
-                                author={plant.author}
-                                key={plant._id}
-                            />
-                        </Col>
-                    ))
-                }
+                <PlantsList />
             </Row>
         </>
     )
