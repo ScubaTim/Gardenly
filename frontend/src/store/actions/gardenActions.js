@@ -78,4 +78,23 @@ export const updatePlant = (updatedPlant, id) => {
     }
 }
 
+export const deletePlant = (id) => {
+    return (dispatch) => {
+        axios
+            .delete(`${url}/garden/${id}`)
+            .then(() => {
+                dispatch({
+                    type: "DELETE_PLANT",
+                    id
+                })
+            })
+            .catch(error => {
+                console.log('Updert Plant Error', error.response)
+                toast.error(error.response?.data, {
+                    position: toast.POSITION.BOTOM_RIGHT
+                })
+            })
+    }
+}
+
 

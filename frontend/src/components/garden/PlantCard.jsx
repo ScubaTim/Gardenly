@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import { useDispatch } from 'react-redux'
+
 import { Link } from 'react-router-dom'
 
 import Card from 'react-bootstrap/Card'
@@ -10,15 +12,22 @@ import Col from 'react-bootstrap/Col'
 
 import moment from 'moment'
 
+import { deletePlant } from '../../store/actions/gardenActions'
+
 const PlantCard = ({ plant }) => {
+    const dispatch = useDispatch()
     const [show, setShow] = useState(false);
 
-    const { date, name, fromSeed, harvestIn, heirloom, isInGarden, seedDepth, soilType, sunlight, watering } = plant;
+    const { date, name, fromSeed, growingZone, harvestIn, heirloom, isInGarden, seedDepth, soilType, sunlight, watering } = plant;
 
     const formattedDate = moment(date).fromNow()
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const handleDeleteTodo = (id) => {
+        dispatch(deletePlant(id))
+    }
 
     return (
         <Card className="shadow m-4">
@@ -42,10 +51,10 @@ const PlantCard = ({ plant }) => {
                                 <div className="mx-auto rounded" style={{ width: "420px", height: "260px", backgroundColor: "mediumSeaGreen" }}></div>
                             </Col>
                         </Row>
-                        <Row className="d-flex justify-content-center">
-                            <Col xs="auto" className=" m-2 ">
+                        <Row className="d-flex">
+                            <Col xs="auto" className=" m-1 ">
                                 <Row xs="auto" className=" m-4 ">
-                                    {/* <strong>Growing Zone:&nbsp;</strong>{growingZone} */}
+                                    <strong>Growing Zone:&nbsp;</strong>{growingZone}
                                 </Row>
                                 <Row xs="auto" className=" m-4 ">
                                     <strong>Seed Depth:&nbsp;</strong>{seedDepth}"
@@ -56,11 +65,11 @@ const PlantCard = ({ plant }) => {
                                 <Row xs="auto" className=" m-4 ">
                                     <strong>Sunlight:&nbsp;</strong>{sunlight}
                                 </Row>
-                            </Col>
-                            <Col xs="auto" className=" m-2">
                                 <Row xs="auto" className=" m-4 ">
                                     <strong>Harvest in:&nbsp;</strong>{harvestIn}&nbsp;days
                                 </Row>
+                            </Col>
+                            <Col xs="auto" className=" m-1">
                                 <Row xs="auto" className=" m-4 ">
                                     <strong>Watering:&nbsp;</strong>{watering}
                                 </Row>
@@ -78,7 +87,7 @@ const PlantCard = ({ plant }) => {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button><Link className="text-white" to={`/editplant/${plant._id}`}>Edit</Link></Button>
-                        <Button variant="danger">Remove</Button>
+                        <Button variant="danger" onClick={() => handleDeleteTodo(plant._id)}>Remove</Button>
                     </Modal.Footer>
                 </Modal>
             </Card.Body>

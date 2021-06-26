@@ -7,17 +7,22 @@ const gardenReducer = (state = [], action) => {
         case "GET_PLANT":
             return action.plant.data
         case "ADD_PLANT":
-            toast.success("A plant was added!", {
+            toast.success("Plant Added!", {
                 position: toast.POSITION.BOTTOM_RIGHT
             })
             return [action.plant.data, ...state]
         case "UPDATE_PLANT":
-            toast.success("A plant was updated!", {
+            toast.success("Plant Updated!", {
                 position: toast.POSITION.BOTTOM_RIGHT
             })
             return state.map((plant) => (
                 plant._id === action.plant.data._id ? action.plant.data : plant
             ))
+        case "DELETE_PLANT":
+            toast.warning("Plant Deleted.", {
+                position: toast.POSITION.BOTTOM_RIGHT
+            })
+            return state.filter((plant) => plant._id !== action.id)
         default:
             return state
     }
