@@ -20,7 +20,7 @@ const Garden = () => {
                     <Button><Link className="text-white" to="/addplant">Add Plant</Link></Button>
                 </Col>
             </Row>
-            <Row className="border border-success rounded mx-2 pb-5 d-flex justify-content-center">
+            <Row className="border border-primary rounded mx-2 pb-5 d-flex justify-content-center">
                 <PlantsList />
             </Row>
         </Container>

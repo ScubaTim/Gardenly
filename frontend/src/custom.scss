@@ -1,5 +1,4 @@
 @import "node_modules/bootstrap/scss/bootstrap";
-@import url('https://fonts.googleapis.com/css2?family=Benne&display=swap');
 
 
 // $gardenWhite:  //Navbar and cards
@@ -24,23 +23,23 @@ $info:          $cyan,
 $warning:       $yellow,
 $danger:        $red,
 $light:         $gray-100,
-$dark:          $gray-800,
+$dark:          $gardenGreen,
  
 ) !default;
 
-.container-fluid {
-    background-color: $gardenYellow;
+.container {
+    background-color: $gardenGreen !important;
 }
 
-h1, h2, h3 {
-    font-family: 'Benne', serif;
+.navbar .navbar-dark {
+    background-color: $gardenWhite !important;
 }
 
 a:hover {
-    text-decoration: none !important;
+    text-decoration: none ;
 }
 
 .btn:hover {
-    text-decoration: none !important;
+    text-decoration: none;
 }
 

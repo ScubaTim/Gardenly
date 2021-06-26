@@ -26,16 +26,17 @@ const PlantCard = ({ plant }) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const handleDeleteTodo = (id) => {
+    const handleDeletePlant = (id) => {
         dispatch(deletePlant(id))
     }
+    console.log(isInGarden)
 
     return (
         <Card className="shadow m-4">
-            <Card.Header className="d-flex justify-content-between font-weight-bold p-1"><Button variant="link">{isInGarden ? <>&#10004;</> : null}</Button><Button variant="link" className="text-dark font-weight-bold" size="lg">X</Button></Card.Header>
+            <Card.Header className="d-flex justify-content-between font-weight-bold p-1"><Button variant="link">{isInGarden ? <>&#10004;</> : null}</Button><Button variant="link" onClick={() => handleDeletePlant(plant._id)} className="text-dark font-weight-bold" size="lg">X</Button></Card.Header>
             <Card.Body className="text-center">
                 <Card.Title>{name}</Card.Title>
-                <div className="mb-3 rounded" style={{ width: "180px", height: "100px", backgroundColor: "mediumSeaGreen" }}></div>
+                <img className="border rounded mb-3" style={{ maxWidth: "180px" }} src={image} alt="plant" />
                 <Card.Text>
                     <h6 className="font-italic font-weight-light">Added {formattedDate}</h6>
                 </Card.Text>
@@ -47,9 +48,9 @@ const PlantCard = ({ plant }) => {
                         <Modal.Title>{name}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Row className="my-4">
+                        <Row className="my-3">
                             <Col>
-                                {image ? image : <div className="mx-auto rounded" style={{ width: "420px", height: "260px", backgroundColor: "mediumSeaGreen" }} />}
+                                <img className="border rounded" style={{ maxWidth: "100%" }} src={image} alt="plant" />
                             </Col>
                         </Row>
                         <Row className="d-flex">
@@ -83,12 +84,15 @@ const PlantCard = ({ plant }) => {
                                 <Row xs="auto" className=" m-4 ">
                                     <strong>Heirloom:&nbsp;</strong>{heirloom}
                                 </Row>
+                                <Row xs="auto" className=" m-4 ">
+                                    <strong>Planted:&nbsp;</strong>{isInGarden ? 'Yes' : 'No'}
+                                </Row>
                             </Col>
                         </Row>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button><Link className="text-white" to={`/editplant/${plant._id}`}>Edit</Link></Button>
-                        <Button variant="danger" onClick={() => handleDeleteTodo(plant._id)}>Remove</Button>
+                        <Button variant="danger" onClick={() => handleDeletePlant(plant._id)}>Remove</Button>
                     </Modal.Footer>
                 </Modal>
             </Card.Body>
