@@ -12,7 +12,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 import { addPlant } from '../../store/actions/gardenActions'
-
+//I was adding images, and destructured a bunch of other stuff on backend i think
 const AddPlant = () => {
     let history = useHistory()
     const dispatch = useDispatch()
@@ -26,6 +26,7 @@ const AddPlant = () => {
     const [watering, setWatering] = useState("Twice Daily")
     const [fromSeed, setFromSeed] = useState("No")
     const [heirloom, setHeirloom] = useState("No")
+    const [imageUrl, setImageUrl] = useState("")
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -40,7 +41,8 @@ const AddPlant = () => {
             harvestIn,
             watering,
             fromSeed,
-            heirloom
+            heirloom,
+            image: imageUrl
         }
 
         dispatch(addPlant(plant))
@@ -48,7 +50,7 @@ const AddPlant = () => {
     }
 
     return (
-        <Container fluid className="d-flex flex-column">
+        <Container fluid className=" mt-3 d-flex flex-column">
             <div className="mt-3 mx-3">
                 <h1>Add New Plant</h1>
             </div>
@@ -139,6 +141,20 @@ const AddPlant = () => {
                             <option>Monthly</option>
                             <option>When Dry</option>
                         </Form.Control>
+                    </Form.Group>
+                </Row>
+
+                <Row className="my-3">
+                    <Form.Group as={Col} >
+                        <Row>
+                            <Col>
+                                <Form.Label>Image</Form.Label>
+                            </Col>
+                            <Col xs="auto">
+                                <span className="text-muted font-weight-light font-italic text-right">Paste image url here. We recommend using a free image hosting service like <strong>*****</strong></span>
+                            </Col>
+                        </Row>
+                        <Form.Control type="text" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} placeholder="Enter image url" />
                     </Form.Group>
                 </Row>
 

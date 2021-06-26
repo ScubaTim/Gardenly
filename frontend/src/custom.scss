@@ -1,24 +1,40 @@
 @import "node_modules/bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Benne&display=swap');
 
 
-// $gardenWhite: #f8f9f4; //Navbar and cards
-// $gardenGreen: #184d47; //App background
-// $gardenYellow: #f9faae; //Headline color
-// $gardenBorderGreen: #94b685; //Border color for buttons
-// $gardenBgGreen: #9ab899; //Garden foreground 
-// $gardenButtonGreen: #1a8059; //button color
+// $gardenWhite:  //Navbar and cards
+// $gardenGreen:  //App background
+// $gardenYellow:  //Headline color
+// $gardenBorderGreen:  //Border color for buttons
+// $gardenBgGreen:  //Garden foreground 
+// $gardenButtonGreen: //button color
 
-// $theme-colors: (
-// $primary:       $blue,
-// $secondary:     $gray-600,
-// $success:       $green,
-// $info:          $cyan,
-// $warning:       $yellow,
-// $danger:        $red,
-// $light:         $gray-100,
-// $dark:          $gray-800,
+$gardenWhite: #f8f9f4;
+$gardenGreen: #184d47;
+$gardenYellow: #f9faae;
+$gardenBorderGreen: #94b685;
+$gardenBgGreen: #9ab899;
+$gardenButtonGreen: #1a8059;
+
+$theme-colors: (
+$primary:       $gardenYellow,
+$secondary:     $gray-600,
+$success:       $green,
+$info:          $cyan,
+$warning:       $yellow,
+$danger:        $red,
+$light:         $gray-100,
+$dark:          $gray-800,
  
-// );
+) !default;
+
+.container-fluid {
+    background-color: $gardenYellow;
+}
+
+h1, h2, h3 {
+    font-family: 'Benne', serif;
+}
 
 a:hover {
     text-decoration: none !important;
@@ -28,5 +44,3 @@ a:hover {
     text-decoration: none !important;
 }
 
-
-@import "~bootstrap/scss/bootstrap";

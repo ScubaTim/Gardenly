@@ -30,14 +30,15 @@ router.post('/', async (req, res) => {
         harvestIn: Joi.string(),
         watering: Joi.string(),
         fromSeed: Joi.string(),
-        heirloom: Joi.string()
+        heirloom: Joi.string(),
+        image: Joi.string()
     })
     const { error } = schema.validate(req.body)
     if (error) return res.status(400).send(error.details[0].message)
 
     //Need to check if plant already exists here -Not Done
 
-    const { name, author, isInGarden, uid, date, growingZone, seedDepth, soilType, sunlight, harvestIn, watering, fromSeed, heirloom } = req.body
+    const { name, author, isInGarden, uid, date, growingZone, seedDepth, soilType, sunlight, harvestIn, watering, fromSeed, heirloom, image } = req.body
 
     let plant = new Plant({
         name,
@@ -52,7 +53,8 @@ router.post('/', async (req, res) => {
         harvestIn,
         watering,
         fromSeed,
-        heirloom
+        heirloom,
+        image
     })
 
     try {
@@ -79,23 +81,25 @@ router.put('/:id', async (req, res) => {
         harvestIn: Joi.string(),
         watering: Joi.string(),
         fromSeed: Joi.string(),
-        heirloom: Joi.string()
+        heirloom: Joi.string(),
+        image: Joi.string()
     })
     const { error } = schema.validate(req.body)
     if (error) return res.status(400).send(error.details[0].message)
+
+
+
 
     try {
         const plant = await Plant.findById(req.params.id)
 
         if (!plant) return res.status(404).send("Plant does not exist in the database.")
 
-        const { name, author, isInGarden, uid, date } = req.body
-        const updatedPlant = await Plant.findByIdAndUpdate(req.params.id, {
+        const {
             name,
             author,
             isInGarden,
             uid,
-            date,
             growingZone,
             seedDepth,
             soilType,
@@ -103,7 +107,22 @@ router.put('/:id', async (req, res) => {
             harvestIn,
             watering,
             fromSeed,
-            heirloom
+            heirloom,
+            image } = req.body
+        const updatedPlant = await Plant.findByIdAndUpdate(req.params.id, {
+            name,
+            author,
+            isInGarden,
+            uid,
+            growingZone,
+            seedDepth,
+            soilType,
+            sunlight,
+            harvestIn,
+            watering,
+            fromSeed,
+            heirloom,
+            image
         }, { new: true })
         res.send(updatedPlant)
 

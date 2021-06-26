@@ -45,8 +45,10 @@ const plantSchema = new mongoose.Schema({
     },
     heirloom: {
         type: String
+    },
+    image: {
+        type: String
     }
-
 })
 
 const Plant = mongoose.model('Plant', plantSchema)

@@ -20,19 +20,18 @@ const EditPlant = () => {
     const { id } = useParams()
 
     const plant = state.filter((plant) => plant._id === id)
-    console.log('plant growingZone', plant[0].growingZone)
 
-    const [name, setName] = useState(plant[0].name)
-    const [checked, setChecked] = useState(plant[0].isInGarden)
-    const [growingZone, setGrowingZone] = useState(plant[0].growingZone)
-    const [seedDepth, setSeedDepth] = useState(plant[0].seedDepth)
-    const [soilType, setSoilType] = useState(plant[0].soilType)
-    const [sunlight, setSunlight] = useState(plant[0].sunlight)
-    const [harvestIn, setHarvestIn] = useState(plant[0].harvestIn)
-    const [watering, setWatering] = useState(plant[0].watering)
-    const [fromSeed, setFromSeed] = useState(plant[0].fromSeed)
-    const [heirloom, setHeirloom] = useState(plant[0].heirloom)
-    console.log('plant growingZone', plant[0].growingZone)
+    const [name, setName] = useState(plant[0]?.name)
+    const [checked, setChecked] = useState(plant[0]?.isInGarden)
+    const [growingZone, setGrowingZone] = useState(plant[0]?.growingZone)
+    const [seedDepth, setSeedDepth] = useState(plant[0]?.seedDepth)
+    const [soilType, setSoilType] = useState(plant[0]?.soilType)
+    const [sunlight, setSunlight] = useState(plant[0]?.sunlight)
+    const [harvestIn, setHarvestIn] = useState(plant[0]?.harvestIn)
+    const [watering, setWatering] = useState(plant[0]?.watering)
+    const [fromSeed, setFromSeed] = useState(plant[0]?.fromSeed)
+    const [heirloom, setHeirloom] = useState(plant[0]?.heirloom)
+    const [imageUrl, setImageUrl] = useState(plant[0]?.image)
 
 
     const handleUpdateSubmit = (e) => {
@@ -48,12 +47,11 @@ const EditPlant = () => {
             harvestIn,
             watering,
             fromSeed,
-            heirloom
+            heirloom,
+            image: imageUrl
         }
 
-        console.log('updatedPlant', updatedPlant)
-
-        dispatch(updatePlant(updatedPlant, plant[0]._id)) //this doesn't work because 
+        dispatch(updatePlant(updatedPlant, id))
         history.push('/')
     }
 
@@ -64,12 +62,12 @@ const EditPlant = () => {
             </div>
             <Form className="border rounded p-4 m-3 shadow" onSubmit={handleUpdateSubmit} >
                 <Row className="mb-3">
-                    <Form.Group as={Col} >
+                    <Form.Group controlid="plant-name" as={Col} >
                         <Form.Label>Plant Name</Form.Label>
                         <Form.Control type="text" value={name} onChange={(e) => setName(e.target.value)} />
                     </Form.Group>
 
-                    <Form.Group as={Col}>
+                    <Form.Group constrolId="heirloom" as={Col}>
                         <Form.Label>Heirloom</Form.Label>
                         <Form.Control as="select" defaultValue={heirloom} onChange={(e) => setHeirloom(e.target.value)}>
                             <option>Yes</option>
@@ -77,7 +75,7 @@ const EditPlant = () => {
                         </Form.Control>
                     </Form.Group>
 
-                    <Form.Group as={Col} >
+                    <Form.Group controlid="from-seed" as={Col} >
                         <Form.Label>From Seed</Form.Label>
                         <Form.Control as="select" defaultValue={fromSeed} onChange={(e) => setFromSeed(e.target.value)}>
                             <option>Yes</option>
@@ -87,7 +85,7 @@ const EditPlant = () => {
                 </Row>
 
                 <Row className="my-3">
-                    <Form.Group as={Col} >
+                    <Form.Group controlid="growing-zone" as={Col} >
                         <Form.Label>Growing Zone</Form.Label>
                         <Form.Control as="select" defaultValue={growingZone} onChange={(e) => setGrowingZone(e.target.value)}>
                             <option>1</option>
@@ -106,12 +104,12 @@ const EditPlant = () => {
                         </Form.Control>
                     </Form.Group>
 
-                    <Form.Group as={Col}>
+                    <Form.Group controlid="seed-depth" as={Col}>
                         <Form.Label>Seed Depth (Inches)</Form.Label>
                         <Form.Control onChange={(e) => setSeedDepth(e.target.value)} defaultValue={seedDepth} />
                     </Form.Group>
 
-                    <Form.Group as={Col}>
+                    <Form.Group controlid="soil-type" as={Col}>
                         <Form.Label>Soil Type</Form.Label>
                         <Form.Control as="select" defaultValue={soilType} onChange={(e) => setSoilType(e.target.value)}>
                             <option>Sandy</option>
@@ -125,7 +123,7 @@ const EditPlant = () => {
                 </Row>
 
                 <Row className="my-3">
-                    <Form.Group as={Col} controlId="formGridCity">
+                    <Form.Group as={Col} controlid="formGridCity">
                         <Form.Label>Sunlight</Form.Label>
                         <Form.Control as="select" defaultValue={sunlight} onChange={(e) => setSunlight(e.target.value)}>
                             <option>Shade</option>
@@ -134,12 +132,12 @@ const EditPlant = () => {
                         </Form.Control>
                     </Form.Group>
 
-                    <Form.Group as={Col}>
+                    <Form.Group controlid="harvest-in" as={Col}>
                         <Form.Label>Harvest In (Days)</Form.Label>
                         <Form.Control defaultValue={harvestIn} onChange={(e) => setHarvestIn(e.target.value)} />
                     </Form.Group>
 
-                    <Form.Group as={Col}>
+                    <Form.Group controlid="watering-frequency" as={Col}>
                         <Form.Label>Watering Frequency</Form.Label>
                         <Form.Control as="select" defaultValue={watering} onChange={(e) => setWatering(e.target.value)}>
                             <option>Twice Daily</option>
@@ -152,9 +150,24 @@ const EditPlant = () => {
                     </Form.Group>
                 </Row>
 
+                <Row className="my-3">
+                    <Form.Group controlid="image" as={Col} >
+                        <Row>
+                            <Col>
+                                <Form.Label>Image</Form.Label>
+                            </Col>
+                            <Col xs="auto">
+                                <span className="text-muted font-weight-light font-italic text-right">Paste image url here. We recommend using a free image hosting service like <strong>*****</strong></span>
+                            </Col>
+                        </Row>
+                        <Form.Control type="text" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} placeholder="Enter image url" />
+                    </Form.Group>
+                </Row>
+
+
                 <Row className="d-flex justify-content-between">
                     <Col xs="auto" >
-                        <Form.Group className="pl-0" as={Col}>
+                        <Form.Group controlid="currently-planted" className="pl-0" as={Col}>
                             <Form.Label><strong>Currently planted?</strong>&nbsp;&nbsp;</Form.Label>
                             <ToggleButton
                                 type="checkbox"

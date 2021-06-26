@@ -13,7 +13,7 @@ const NavBar = () => {
     }
 
     return (
-        <Navbar bg="primary" variant="dark" expand="lg">
+        <Navbar className="mb-3" bg="primary" variant="dark" expand="lg">
             <Navbar.Brand><Link className="text-white" to="/">Gardenly</Link></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">

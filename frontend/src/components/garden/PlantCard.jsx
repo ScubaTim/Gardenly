@@ -18,9 +18,10 @@ const PlantCard = ({ plant }) => {
     const dispatch = useDispatch()
     const [show, setShow] = useState(false);
 
-    const { date, name, fromSeed, growingZone, harvestIn, heirloom, isInGarden, seedDepth, soilType, sunlight, watering } = plant;
+    const { date, name, fromSeed, growingZone, harvestIn, heirloom, isInGarden, seedDepth, soilType, sunlight, watering, image } = plant;
 
-    const formattedDate = moment(date).fromNow()
+    debugger
+    let formattedDate = moment(date).fromNow()
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -48,7 +49,7 @@ const PlantCard = ({ plant }) => {
                     <Modal.Body>
                         <Row className="my-4">
                             <Col>
-                                <div className="mx-auto rounded" style={{ width: "420px", height: "260px", backgroundColor: "mediumSeaGreen" }}></div>
+                                {image ? image : <div className="mx-auto rounded" style={{ width: "420px", height: "260px", backgroundColor: "mediumSeaGreen" }} />}
                             </Col>
                         </Row>
                         <Row className="d-flex">
