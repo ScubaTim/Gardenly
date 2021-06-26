@@ -49,7 +49,7 @@ const SignUp = () => {
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="email" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     </Form.Group>
-                    <Button block variant="primary" type="submit" onClick={handleSignUp}>
+                    <Button block variant="success" type="submit" onClick={handleSignUp}>
                         Sign Up
                     </Button>
                 </Form>

@@ -43,7 +43,7 @@ const SignIn = () => {
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter Password" />
                     </Form.Group>
-                    <Button block variant="primary" type="submit">
+                    <Button block variant="success" type="submit">
                         Sign In
                     </Button>
                 </Form>

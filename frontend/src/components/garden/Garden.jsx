@@ -1,8 +1,6 @@
-import React, { useSelector } from 'react';
+import React from 'react';
 
 import { Link } from 'react-router-dom'
-
-import { Redirect } from 'react-router-dom'
 
 import PlantsList from '../garden/PlantsList'
 
@@ -12,19 +10,18 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 
 const Garden = () => {
-    const auth = useSelector((state) => state.auth)
 
     return (
         <Container fluid className="mt-3">
             <Row className="my-3 d-flex justify-content-between">
                 <Col xs="auto">
-                    <h1>Your Garden</h1>
+                    <h1 className="text-success font-weight-bold" >Your Garden</h1>
                 </Col>
                 <Col xs="auto">
-                    <Button><Link className="text-white" to="/addplant">Add Plant</Link></Button>
+                    <Button variant="success"><Link className="text-white" to="/addplant">Add Plant</Link></Button>
                 </Col>
             </Row>
-            <Row className="border border-primary rounded mx-2 pb-5 d-flex justify-content-center">
+            <Row className="border border-success rounded mx-2 pb-5 d-flex justify-content-center">
                 <PlantsList />
             </Row>
         </Container>

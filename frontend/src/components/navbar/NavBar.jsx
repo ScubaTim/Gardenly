@@ -23,16 +23,23 @@ const NavBar = () => {
     }
 
     return (
-        <Navbar className="mb-3" bg="primary" variant="dark" expand="lg">
-            <Navbar.Brand><Link className="text-white" to="/">Gardenly</Link></Navbar.Brand>
+        <Navbar className="mb-3" bg="success" variant="dark" expand="lg">
+            <Navbar.Brand><Link className="text-white font-weight-bold" to="/">Gardenly</Link></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse >
                 <Nav className="ml-auto">
-                    <Navbar.Text className="text-light text-capitalize">Welcome&nbsp;{state.auth.name}</Navbar.Text>
-                    <Nav.Link><Link className="text-white" to="/">My Garden</Link></Nav.Link>
-                    <Nav.Link><Link className="text-white" to="/signup">Sign Up</Link></Nav.Link>
-                    <Nav.Link><Link className="text-white" to="/signin">Sign In</Link></Nav.Link>
-                    <Nav.Link className="text-white" onClick={() => handleSignOut()}>Sign Out</Nav.Link>
+                    {state.auth._id ? (
+                        <>
+                            <Navbar.Text className="text-light text-capitalize">Welcome&nbsp;{state.auth.name}&nbsp;&nbsp;</Navbar.Text>
+                            <Nav.Link><Link className="text-white" to="/">My Garden</Link></Nav.Link>
+                            <Nav.Link className="text-white" onClick={() => handleSignOut()}>Sign Out</Nav.Link>
+                        </>
+                    ) : (
+                        <>
+                            <Nav.Link><Link className="text-white" to="/signup">Sign Up</Link></Nav.Link>
+                            <Nav.Link><Link className="text-white" to="/signin">Sign In</Link></Nav.Link>
+                        </>
+                    )}
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

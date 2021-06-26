@@ -173,7 +173,7 @@ const AddPlant = () => {
                         </Form.Group>
                     </Col>
                     <Col xs="auto">
-                        <Button variant="primary" type="submit" size="lg">
+                        <Button variant="success" type="submit" size="lg">
                             Submit
                         </Button>
                     </Col>
