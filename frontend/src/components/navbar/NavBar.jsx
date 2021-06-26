@@ -14,6 +14,8 @@ const NavBar = () => {
     const state = useSelector(state => state)
     const dispatch = useDispatch()
 
+    console.log('navbar state', state.auth.name)
+
     const handleSignOut = () => {
 
         dispatch(signOut())
@@ -24,8 +26,9 @@ const NavBar = () => {
         <Navbar className="mb-3" bg="primary" variant="dark" expand="lg">
             <Navbar.Brand><Link className="text-white" to="/">Gardenly</Link></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto">
+            <Navbar.Collapse >
+                <Nav className="ml-auto">
+                    <Navbar.Text className="text-light text-capitalize">Welcome&nbsp;{state.auth.name}</Navbar.Text>
                     <Nav.Link><Link className="text-white" to="/">My Garden</Link></Nav.Link>
                     <Nav.Link><Link className="text-white" to="/signup">Sign Up</Link></Nav.Link>
                     <Nav.Link><Link className="text-white" to="/signin">Sign In</Link></Nav.Link>

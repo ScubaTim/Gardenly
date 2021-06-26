@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useSelector } from 'react';
+
 import { Link } from 'react-router-dom'
+
+import { Redirect } from 'react-router-dom'
 
 import PlantsList from '../garden/PlantsList'
 
@@ -9,6 +12,7 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 
 const Garden = () => {
+    const auth = useSelector((state) => state.auth)
 
     return (
         <Container fluid className="mt-3">

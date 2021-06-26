@@ -157,7 +157,7 @@ const EditPlant = () => {
                                 <Form.Label>Image</Form.Label>
                             </Col>
                             <Col xs="auto">
-                                <span className="text-muted font-weight-light font-italic text-right">Paste image url here. We recommend using a free image hosting service like <strong>*****</strong></span>
+                                <span className="text-muted font-weight-light font-italic text-right">Paste image url here. We recommend using a free image hosting service like <strong><a href="https://postimages.org/" target="_blank" rel="noopener noreferrer">PostImages</a></strong></span>
                             </Col>
                         </Row>
                         <Form.Control type="text" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} placeholder="Enter image url" />
