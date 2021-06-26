@@ -1,11 +1,17 @@
 import React from 'react';
+
 import { Link, useHistory } from 'react-router-dom'
+
+import { useSelector } from 'react-redux'
 
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 
 const NavBar = () => {
     const history = useHistory()
+    const state = useSelector(state => state)
+
+    console.log('navbar state', state)
 
     const handleSignOut = () => {
         //Sign out user

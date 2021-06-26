@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { Redirect } from 'react-router-dom'
 
 import { signUp } from '../../store/actions/authActions'
 
@@ -11,10 +13,10 @@ import Button from 'react-bootstrap/Button'
 
 const SignUp = () => {
     const dispatch = useDispatch()
+    const auth = useSelector((state) => state.auth)
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
 
     const handleSignUp = (e) => {
         e.preventDefault()
@@ -24,11 +26,11 @@ const SignUp = () => {
             email,
             password
         }
-        console.log(user
-        )
 
         dispatch(signUp(user))
     }
+
+    if (auth._id) return <Redirect to="/" />
 
     return (
         <Container fluid className="d-flex justify-content-center">

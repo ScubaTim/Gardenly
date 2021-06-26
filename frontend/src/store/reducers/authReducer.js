@@ -10,6 +10,8 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
+        case "USER_LOADED":
+        case "SIGN_IN":
         case "SIGN_UP":
             toast("Welcome to Gardenly!", {
                 position: toast.POSITION.BOTTOM_RIGHT

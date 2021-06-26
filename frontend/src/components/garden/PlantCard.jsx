@@ -16,20 +16,18 @@ import { deletePlant } from '../../store/actions/gardenActions'
 
 const PlantCard = ({ plant }) => {
     const dispatch = useDispatch()
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(false)
 
-    const { date, name, fromSeed, growingZone, harvestIn, heirloom, isInGarden, seedDepth, soilType, sunlight, watering, image } = plant;
+    const { date, name, fromSeed, growingZone, harvestIn, heirloom, isInGarden, seedDepth, soilType, sunlight, watering, image } = plant
 
-    debugger
     let formattedDate = moment(date).fromNow()
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
 
     const handleDeletePlant = (id) => {
         dispatch(deletePlant(id))
     }
-    console.log(isInGarden)
 
     return (
         <Card className="shadow m-4">
