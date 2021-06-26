@@ -2,19 +2,21 @@ import React from 'react';
 
 import { Link, useHistory } from 'react-router-dom'
 
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 
+import { signOut } from '../../store/actions/authActions'
+
 const NavBar = () => {
     const history = useHistory()
     const state = useSelector(state => state)
-
-    console.log('navbar state', state)
+    const dispatch = useDispatch()
 
     const handleSignOut = () => {
-        //Sign out user
+
+        dispatch(signOut())
         history.push('/signin')
     }
 
