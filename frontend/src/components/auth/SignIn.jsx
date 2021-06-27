@@ -34,7 +34,8 @@ const SignIn = () => {
         <Container fluid className="d-flex justify-content-center">
             <Row>
                 <Form className="border rounded p-4 my-5 shadow" noValidate autoComplete="off" onSubmit={handleSignIn} >
-                    <h1 className="mb-4">Sign In</h1>
+                    <h1 >Sign In</h1>
+                    <hr className="mb-4" />
                     <Form.Group  >
                         <Form.Label>Email</Form.Label>
                         <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter email" />

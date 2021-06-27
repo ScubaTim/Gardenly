@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+require('dotenv').config()
+
 
 const plantSchema = new mongoose.Schema({
     name: {

@@ -5,14 +5,14 @@ const Joi = require("joi")
 
 const router = express.Router()
 
-router.get('/', auth, async (req, res) => {
+router.get('/', auth, async (req, res, next) => {
     try {
         const plants = await Plant.find()
         const filteredPlants = plants.filter((plant) => plant.uid === req.user._id)
         res.send(filteredPlants)
 
     } catch (error) {
-        res.status(500).send(error.message)
+        res.status(500).send('Backend route error getting plants', error.message)
         console.log("Error getting plants from database:", error)
     }
 })
@@ -37,7 +37,7 @@ router.post('/', auth, async (req, res) => {
     const { error } = schema.validate(req.body)
     if (error) return res.status(400).send(error.details[0].message)
 
-    //Need to check if plant already exists here -Not Done
+    console.log('req.body in plants POST route:', req.body)
 
     const { name, author, isInGarden, uid, date, growingZone, seedDepth, soilType, sunlight, harvestIn, watering, fromSeed, heirloom, image } = req.body
 
@@ -109,6 +109,7 @@ router.put('/:id', auth, async (req, res) => {
             fromSeed,
             heirloom,
             image } = req.body
+
         const updatedPlant = await Plant.findByIdAndUpdate(req.params.id, {
             name,
             author,

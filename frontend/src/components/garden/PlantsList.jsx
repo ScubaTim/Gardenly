@@ -11,7 +11,7 @@ import PlantCard from './PlantCard'
 import Col from 'react-bootstrap/Col'
 
 const PlantsList = () => {
-    const dispatch = useDispatch(getPlants())
+    const dispatch = useDispatch()
     const state = useSelector((state) => state)
 
     useEffect(() => {

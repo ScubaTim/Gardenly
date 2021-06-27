@@ -2,6 +2,25 @@ import axios from 'axios'
 import { url, setHeaders } from '../../api'
 import { toast } from 'react-toastify'
 
+export const getPlants = () => {
+    return (dispatch) => {
+        axios
+            .get(`${url}/garden`, setHeaders())
+            .then(plants => {
+                dispatch({
+                    type: "GET_PLANTS",
+                    plants
+                })
+            })
+            .catch(error => {
+                console.log('Error in gardenActions getting plants', error.response)
+                toast.error(error.response?.data, {
+                    position: toast.POSITION.BOTOM_RIGHT
+                })
+            })
+    }
+}
+
 export const addPlant = (plant) => {
     return (dispatch, getState) => {
         const author = getState().auth.name
@@ -16,26 +35,7 @@ export const addPlant = (plant) => {
                 })
             })
             .catch(error => {
-                console.log('Updert Plant Error', error.response)
-                toast.error(error.response?.data, {
-                    position: toast.POSITION.BOTOM_RIGHT
-                })
-            })
-    }
-}
-
-export const getPlants = () => {
-    return (dispatch) => {
-        axios
-            .get(`${url}/garden`, setHeaders())
-            .then(plants => {
-                dispatch({
-                    type: "GET_PLANTS",
-                    plants
-                })
-            })
-            .catch(error => {
-                console.log('Updert Plant Error', error.response)
+                console.log('Error in gardenActions adding a plant', error.response)
                 toast.error(error.response?.data, {
                     position: toast.POSITION.BOTOM_RIGHT
                 })
@@ -54,7 +54,7 @@ export const getPlant = (id) => {
                 })
             })
             .catch(error => {
-                console.log('Updert Plant Error', error.response)
+                console.log('Error in gardenActions getting a plant', error.response)
                 toast.error(error.response?.data, {
                     position: toast.POSITION.BOTOM_RIGHT
                 })
@@ -73,7 +73,7 @@ export const updatePlant = (updatedPlant, id) => {
                 })
             })
             .catch(error => {
-                console.log('Updert Plant Error', error.response)
+                console.log('Error in gardenActions updating a plant', error.response)
                 toast.error(error.response?.data, {
                     position: toast.POSITION.BOTOM_RIGHT
                 })
@@ -92,7 +92,7 @@ export const deletePlant = (id) => {
                 })
             })
             .catch(error => {
-                console.log('Updert Plant Error', error.response)
+                console.log('Error in gardenActions deleting a plant', error.response)
                 toast.error(error.response?.data, {
                     position: toast.POSITION.BOTOM_RIGHT
                 })

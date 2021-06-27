@@ -13,7 +13,9 @@ router.post('/', async (req, res) => {
         password: Joi.string().min(6).max(1024).required()
     })
     const { error } = schema.validate(req.body)
-    if (error) return res.status(400).send(error.details[0].message)
+    if (error) return res.status(400).send('error in signUP joi validation route backend', error.details[0].message)
+
+    console.log('req.body in signUP backend route:', req.body)
 
     try {
         let user = await User.findOne({ email: req.body.email })

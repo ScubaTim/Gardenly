@@ -10,7 +10,7 @@ const gardenReducer = (state = [], action) => {
             toast.success("Plant Added!", {
                 position: toast.POSITION.BOTTOM_RIGHT
             })
-            return [action.plant.data, ...state]
+            return [...state, action.plant.data]
         case "UPDATE_PLANT":
             toast.success("Plant Updated!", {
                 position: toast.POSITION.BOTTOM_RIGHT

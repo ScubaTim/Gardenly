@@ -1,11 +1,10 @@
-const plants = require('./routes/plants')
-const signUp = require('./routes/signUp')
-const signIn = require('./routes/signIn')
+require("dotenv").config()
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
-
-require("dotenv").config()
+const plants = require('./routes/plants')
+const signUp = require('./routes/signUp')
+const signIn = require('./routes/signIn')
 
 const app = express()
 
@@ -32,7 +31,7 @@ mongoose.connect(URI, {
     useUnifiedTopology: true,
     useFindAndModify: false
 })
-    .then(() => console.log("Connection to MongoDB Database successful"))
+    .then((result) => console.log("Connection to MongoDB Database successful"))
     .catch((error) => {
         console.error("MongoDB connection failed", error)
     })

@@ -1,5 +1,4 @@
 const { User } = require('../models/user')
-const { Plant } = require('../models/plant')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const express = require("express")
@@ -13,7 +12,9 @@ router.post('/', async (req, res) => {
         password: Joi.string().min(6).max(1024).required()
     })
     const { error } = schema.validate(req.body)
-    if (error) return res.status(400).send(error.details[0].message)
+    if (error) return res.status(400).send('error in sign in joi validation', error.details[0].message)
+
+    console.log('req.body in signIn backend route', req.body)
 
     try {
         let user = await User.findOne({ email: req.body.email })

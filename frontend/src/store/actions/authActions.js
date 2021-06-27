@@ -8,6 +8,8 @@ export const signUp = (user) => {
             .post(`${url}/signup`, user)
             .then((token) => {
 
+                console.log('token in authAction', token)
+
                 localStorage.setItem("token", token.data)
 
                 dispatch({
@@ -16,7 +18,7 @@ export const signUp = (user) => {
                 })
             })
             .catch((error) => {
-                console.log(error.response)
+                console.log('Error in authActions signing up', error.response)
                 toast.error(error.response?.data, {
                     position: toast.POSITION.BOTTOM_RIGHT
                 })
@@ -29,6 +31,9 @@ export const signIn = (credentials) => {
         axios
             .post(`${url}/signin`, credentials)
             .then((token) => {
+
+                console.log('token in signIn', token)
+
                 localStorage.setItem("token", token.data)
 
                 dispatch({
@@ -37,7 +42,7 @@ export const signIn = (credentials) => {
                 })
             })
             .catch((error) => {
-                console.log(error.response)
+                console.log('Error in authActions signing in', error.response)
                 toast.error(error.response?.data, {
                     position: toast.POSITION.BOTTOM_RIGHT
                 })
@@ -47,13 +52,19 @@ export const signIn = (credentials) => {
 
 export const loadUser = () => {
     return (dispatch, getState) => {
+        const state = getState()
         const token = getState().auth.token
+        console.log('state in loadUser', state)
+        console.log('token in loadUser authAction', token)
         if (token) {
             dispatch({
                 type: "USER_LOADED",
                 token
             })
-        } else return null
+        } else {
+            console.log('no token in loadUser auth action, returning null')
+            return null
+        }
     }
 }
 

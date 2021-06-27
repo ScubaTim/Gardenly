@@ -36,7 +36,8 @@ const SignUp = () => {
         <Container fluid className="d-flex justify-content-center">
             <Row>
                 <Form className="border rounded p-4 my-5 shadow" noValidate autoComplete="off" >
-                    <h1 className="mb-4">Sign Up</h1>
+                    <h1>Sign Up</h1>
+                    <hr className="mb-4" />
                     <Form.Group  >
                         <Form.Label>Name</Form.Label>
                         <Form.Control type="text" placeholder="Enter Name" value={name} onChange={(e) => setName(e.target.value)} />

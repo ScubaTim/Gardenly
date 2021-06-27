@@ -14,8 +14,6 @@ const NavBar = () => {
     const state = useSelector(state => state)
     const dispatch = useDispatch()
 
-    console.log('navbar state', state.auth.name)
-
     const handleSignOut = () => {
 
         dispatch(signOut())

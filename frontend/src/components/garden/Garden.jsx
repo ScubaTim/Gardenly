@@ -12,7 +12,7 @@ import Button from 'react-bootstrap/Button'
 const Garden = () => {
 
     return (
-        <Container fluid className="mt-3">
+        <Container fluid className="mt-4">
             <Row className="my-3 d-flex justify-content-between">
                 <Col xs="auto">
                     <h1 className="text-success font-weight-bold" >Your Garden</h1>

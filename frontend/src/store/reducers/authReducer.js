@@ -10,13 +10,14 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        case "USER_LOADED":
         case "SIGN_IN":
         case "SIGN_UP":
+        case "USER_LOADED":
             toast("Welcome to Gardenly!", {
                 position: toast.POSITION.BOTTOM_RIGHT
             })
             const user = jwtDecode(action.token)
+            console.log('user in authReducer', user)
             return {
                 ...initialState,
                 token: action.token,
